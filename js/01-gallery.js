@@ -1,7 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-
 const galleryList = document.querySelector('.gallery');
 //const gallaryListItemImage = document.querySelector('.gallery__image')
 const galleryItemMarkup = createGallaryItemsMarkup(galleryItems);
@@ -26,6 +25,9 @@ function createGallaryItemsMarkup(galleryItems) {
 galleryList.addEventListener('click', (event) => {
     event.preventDefault();
     console.log(event.target.dataset.source);
+    basicLightbox.create(`
+		<img src="${event.target.dataset.source}">
+	`).show()
     
 });
 
