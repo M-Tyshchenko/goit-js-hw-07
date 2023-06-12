@@ -1,11 +1,13 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
+
 const galleryList = document.querySelector('.gallery');
-//const gallaryListItemImage = document.querySelector('.gallery__image')
 const galleryItemMarkup = createGallaryItemsMarkup(galleryItems);
 
 galleryList.insertAdjacentHTML('beforeend', galleryItemMarkup);
+galleryList.addEventListener('click', openModalHandler);
+
 
 function createGallaryItemsMarkup(galleryItems) {
     return galleryItems.map(({preview, original, description}) => {
@@ -22,13 +24,22 @@ function createGallaryItemsMarkup(galleryItems) {
     }).join('');
 }
 
-galleryList.addEventListener('click', (event) => {
+function openModalHandler(event) {
     event.preventDefault();
+
     console.log(event.target.dataset.source);
-    basicLightbox.create(`
-		<img src="${event.target.dataset.source}">
-	`).show()
-    
-});
+
+    const modalWindow = basicLightbox.create(`<img src="${event.target.dataset.source}">`);
+    modalWindow.show();
+  
+    window.addEventListener('keydown', closeModalHandler); 
 
 
+    function closeModalHandler(event) {
+        if (event.code !== 'Escape') {
+            return;
+        }
+        window.removeEventListener('keydown', closeModalHandler);
+        modalWindow.close();
+    }
+}
