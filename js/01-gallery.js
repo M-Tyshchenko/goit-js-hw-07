@@ -3,13 +3,13 @@ import { galleryItems } from './gallery-items.js';
 
 
 const galleryList = document.querySelector('.gallery');
-const galleryItemMarkup = createGallaryItemsMarkup(galleryItems);
+const galleryItemMarkup = createGalleryItemsMarkup(galleryItems);
 
 galleryList.insertAdjacentHTML('beforeend', galleryItemMarkup);
 galleryList.addEventListener('click', openModalHandler);
 
 
-function createGallaryItemsMarkup(galleryItems) {
+function createGalleryItemsMarkup(galleryItems) {
     return galleryItems.map(({preview, original, description}) => {
         return `<li class="gallery__item">
                     <a class="gallery__link" href="${original}">
