@@ -27,8 +27,9 @@ function createGallaryItemsMarkup(galleryItems) {
 function openModalHandler(event) {
     event.preventDefault();
 
-    console.log(event.target.dataset.source);
-
+    if (!event.target.classList.contains('gallery__image')) {
+        return;
+    }
     const modalWindow = basicLightbox.create(`<img src="${event.target.dataset.source}">`);
     modalWindow.show();
   
